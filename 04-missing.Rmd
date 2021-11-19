@@ -1,1 +1,161 @@
 # Missing values
+```{r,message=FALSE}
+library(tidyverse)
+library(patchwork)
+library(readr)
+```
+For convenience, we replace all empty value to NA first.
+```{r}
+NYC_Jobs <- read_csv("NYC_Jobs.csv")
+NYC_Jobs[NYC_Jobs == ''] <- NA
+dim(NYC_Jobs)
+```
+
+
+
+```{r,echo=FALSE}
+plot_missing<- function(df,percent) {
+  
+missing_patterns <- data.frame(is.na(df)) %>%
+  group_by_all() %>%
+  count(name = "count", sort = TRUE) %>%
+  ungroup() 
+ library(scales)
+missing_value <- colSums(is.na(df)) %>% sort(decreasing = TRUE)
+colum <- data.frame(missing_value)
+
+tidycolum <- colum %>% rownames_to_column("id")
+
+if(percent==TRUE){
+  
+  
+
+sumc=dim(df)[1]
+p1 <- ggplot(tidycolum, aes(reorder(id, -missing_value),y=(missing_value/sumc)*100))+
+                  geom_bar(stat = "identity",fill='dodgerblue', alpha=0.7) + 
+                  ylab("% rows missing:") + ylim(0,100)+
+                  xlab("")+
+                  ggtitle("Missing value patterns")
+
+tms <- missing_patterns %>% rownames_to_column("number")
+x=dim(tms)[2]-1
+tms$sum <- rowSums(tms[,2:x])
+tms1<- tms%>% mutate(sum1 = case_when(sum==0  ~ "complete", sum > 0  ~ "not"))
+tms1$id<- as.numeric(tms1$number)
+p2 <- ggplot(tms1, aes(x=(count/sumc)*100, y=reorder(number,-id),fill=sum1)) + 
+          geom_bar(stat = "identity",alpha=0.7) + 
+          scale_fill_manual(values = c('complete'='blue','not'='dodgerblue'))+
+          xlab("% rows ")+xlim(0,100)+
+          ylab("")+
+          theme(legend.position="none")
+          
+
+  
+  
+}else{
+
+
+
+
+missing_value <- colSums(is.na(df)) %>% sort(decreasing = TRUE)
+colum <- data.frame(missing_value)
+
+tidycolum <- colum %>% rownames_to_column("id")
+
+p1 <- ggplot(tidycolum, aes(reorder(id, -missing_value),missing_value))+
+                  geom_bar(stat = "identity",fill='dodgerblue', alpha=0.7) + 
+                  ylab("num rows missing:") + 
+                  xlab("")+
+                  ggtitle("Missing value patterns")
+
+tms <- missing_patterns %>% rownames_to_column("number")
+x=dim(tms)[2]-1
+tms$sum <- rowSums(tms[,2:x])
+
+
+tms1<- tms%>% mutate(sum1 = case_when(sum==0  ~ "complete", sum > 0  ~ "not"))
+tms1$id<- as.numeric(tms1$number)
+p2 <- ggplot(tms1, aes(x=count, y=reorder(number,-id),fill=sum1)) + 
+          geom_bar(stat = "identity",alpha=0.7) + 
+          scale_fill_manual(values = c('complete'='blue','not'='dodgerblue'))+
+          xlab("row count")+
+          ylab("")+
+          theme(legend.position="none")
+          
+
+
+
+
+
+
+
+
+ 
+  
+}
+tms_tm <- tms %>% gather(key, value, -number, -count, -sum)
+
+tms_tm1 <- tms_tm %>% mutate(value1 = case_when(sum > 0 & value == FALSE ~ "FALSE", sum > 0 & value == TRUE ~ "TRUE", sum == 0 ~ "COMPLETE"))
+
+
+tms_tm1$missing_value <- tms_tm1$count * tms_tm1$value
+tms_tm1$id<- as.numeric(tms_tm1$number)
+
+x_location <- (length(tidycolum$id) + 1) / 2
+y_location <- length(tms$number) - as.numeric(tms$number[tms$sum == 0]) + 1
+
+p3 <- ggplot(tms_tm1, aes(x = reorder(key,-missing_value), y = reorder(number,-id), fill = value1)) + 
+          geom_tile(color = "white",alpha=0.7)+ 
+          scale_fill_manual(values = c('COMPLETE'='darkgrey','FALSE'='lightgrey','TRUE'='mediumpurple'))+
+          xlab("variables")+
+          ylab("missing patterns")+
+          theme(legend.position="none")+
+          annotate("text", x_location, y_location, label = "complete cases")
+
+
+
+layout <- c(area(1,1,1,3), area(2,4,4,4), area(2,1,4,3))
+p1 + p2 + p3 + plot_layout(design = layout) 
+
+
+}
+
+```
+Our dataset has 2838 rows and 30 columns.
+
+We want to check if there is any missing value in our NYC job dataset.
+```{r}
+jobs<-NYC_Jobs
+col<-colSums(is.na(jobs)) %>% sort(decreasing = TRUE)
+coll<-data.frame(col)
+coll
+```
+We can see that there are total 12 columns have missing values. We decide to ignore Minimum Qualify Requirement, To Apply, Job Category, Career Level and Residency Requirement because they only have less than 1% missing values in 2838 records.
+
+
+We choose 7 columns that have more than 1% missing values to draw the missing pattern graph
+
+```{r fig1, fig.height = 10, fig.width = 10,message=FALSE}
+df<-NYC_Jobs%>%select("Preferred Skills","Recruitment Contact","Additional Information", "Hours/Shift" ,"Work Location 1","Business Title","Post Until", "Full-Time/Part-Time indicator")
+
+df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
+plot_missing(df,percent = TRUE)
+```
+
+
+From above plot, we can see that 100% of Recruitment Contact are missing, so we decide to drop this column.
+The hours/Shift have over 75% values are missing, and for those values that are not lost, they are very different from each other, and are also difficult for us to classify and compare, so we decide to remove this column.
+The Post Until column have over 50% values are missing but we will keep it because Post Until is a date that the job post is available, and the missing means this post will remain available until filled.
+The Prefered Skill column have 10% values are missing. We will keep it because the missing means this post do not have prefered skill requirement.
+For other variables, we will determine how to deal with them after we finish data transformation.
+
+
+```{r fig2, fig.height = 5, fig.width = 10,message=FALSE}
+c <- seq(1,2838,by = 188)
+df16 <- df[c,]
+tidydf16 <- df16 %>% gather(key, value, -title, -RecruCon, -Info, -loc, -FTPT) %>% mutate(missing = ifelse(is.na(value), "yes", "no"))
+ggplot(tidydf16, aes(x = key, y = fct_rev(title), fill = missing )) + geom_tile(color = "white") + scale_fill_viridis_d() + theme_bw()+ylab('Business Title')+xlab("")
+```
+
+Since Business title is one of the most important variables,we choose some records to analyze the relationship and check if our decision is right.
+
