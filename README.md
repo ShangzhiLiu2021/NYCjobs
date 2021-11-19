@@ -1,4 +1,4 @@
-This is a final project about NYC jobs by Group 39, Yunxiao Wang and Shangzhi Liu.
+This is a EDAV final project about NYC jobs by Group 39, Yunxiao Wang and Shangzhi Liu.
 
 Book URL: https://shangzhiliu2021.github.io/NYCjobs/
 
