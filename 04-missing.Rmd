@@ -1,5 +1,5 @@
 # Missing values
-```{r,message=FALSE}
+```{r,message=FALSE,echo=FALSE}
 library(tidyverse)
 library(patchwork)
 library(readr)
@@ -124,7 +124,7 @@ p1 + p2 + p3 + plot_layout(design = layout)
 Our dataset has 2838 rows and 30 columns.
 
 We want to check if there is any missing value in our NYC job dataset.
-```{r}
+```{r,echo=FALSE}
 jobs<-NYC_Jobs
 col<-colSums(is.na(jobs)) %>% sort(decreasing = TRUE)
 coll<-data.frame(col)
@@ -135,7 +135,7 @@ We can see that there are total 12 columns have missing values. We decide to ign
 
 We choose 7 columns that have more than 1% missing values to draw the missing pattern graph
 
-```{r fig1, fig.height = 10, fig.width = 10,message=FALSE}
+```{r fig1, fig.height = 10, fig.width = 10,message=FALSE,echo=FALSE}
 df<-NYC_Jobs%>%select("Preferred Skills","Recruitment Contact","Additional Information", "Hours/Shift" ,"Work Location 1","Business Title","Post Until", "Full-Time/Part-Time indicator")
 
 df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
@@ -150,7 +150,7 @@ The Prefered Skill column have 10% values are missing. We will keep it because t
 For other variables, we will determine how to deal with them after we finish data transformation.
 
 
-```{r fig2, fig.height = 5, fig.width = 10,message=FALSE}
+```{r fig2, fig.height = 5, fig.width = 10,message=FALSE,echo=FALSE}
 c <- seq(1,2838,by = 188)
 df16 <- df[c,]
 tidydf16 <- df16 %>% gather(key, value, -title, -RecruCon, -Info, -loc, -FTPT) %>% mutate(missing = ifelse(is.na(value), "yes", "no"))
