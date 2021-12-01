@@ -1,2 +1,6 @@
 # Data sources
 
+Our group collected the data together. It is from https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t.
+This dataset contains current job postings available on the City of New York’s official jobs site: http://www.nyc.gov/html/careers/html/search/search.shtml.
+
+

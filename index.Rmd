@@ -7,3 +7,9 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+This project is created by Yunxiao Wang and Shangzhi Liu in Final Project Group 39. 
+
+As graduate students, besides finishing our studies, finding a suitable job is also one of the most important things for us. Especially in New York, a bustling international city, there are opportunities everywhere. Many companies have openings and are eager to hire competent people. 
+
+However, although there are many job postings, it is always a problem for job seekers to find the most suitable job for them from all the information of these job postings. Therefore, our group chose the topic of job postings in New York City to help people better choose the jobs that suit them by summarizing the useful information and trend from these job postings, such as salary, location, and skills. What's more, we also focus on some questions that graduate students also care about when they look for jobs, for example, what skills or requirements are needed to get a high salary job? What kind of job position is needed most in NYC? For people with fixed salary ranges and fixed job categories, what kind of jobs suit him and are in high demand?
+
