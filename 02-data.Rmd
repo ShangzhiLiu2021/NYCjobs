@@ -12,7 +12,7 @@ For these 30 variables:
 4. #Of Positions (num): Number of vacancies to be filled.
 5. Business Title (chr): Business title
 6. Civil Service Title (chr): Civil Service title
-7. Title Classification (chr)	
+7. Title Classification (chr):All Civil Service title are grouped into four categories
 8. Title Code No (chr): Civil Service title Code
 9. Level (chr): Civil Service title level
 10. Job Category (chr)	
