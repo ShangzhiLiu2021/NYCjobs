@@ -6,35 +6,35 @@ This dataset contains current job postings available on the City of New York’s
 This dataset has 2831 rows and 30 columns. Each row is a Job Posting from one company. Each column is one kind of information for each job posting.
 For these 30 variables:
 
-1. Job ID: Job Opening ID.
-2. Agency: Name of the City agency where the vacancy exists.
-3. Posting Type: Internal or External job posting.
-4. #Of Positions: Number of vacancies to be filled.
-5. Business Title: Business title
-6. Civil Service Title: Civil Service title
-7. Title Classification	
-8. Title Code No: Civil Service title Code
-9. Level: Civil Service title level
-10. Job Category	
-11. Full-Time/Part-Time indicator	
-12. Career Level	
-13. Salary Range From: Proposed salary from: range. (Can be 0)
-14. Salary Range To: Proposed salary to: range. (Can be 0)
-15. Salary Frequency: Proposed salary frequency
-16. Work Location: Agency location.
-17. Division/Work Unit: Department/Division within the hiring agency.
-18. Job Description: Description of the job responsibilities for this position.
-19. Minimum Qual Requirements: Minimum qualifications required for position.
-20. Preferred Skills: Preferred skills for this position.
-21. Additional Information: Additional information provided by the hiring agency.
-22. To Apply: Instructions on how to apply for this postion.
-23. Hours/Shift: Working hours and shift information.
-24. Work Location 1: Specific work location for this opening.
-25. Recruitment Contact: Recruitment contact information.
-26. Residency Requirement: Residency requirements for this position.
-27. Posting Date: Date that the position was posted.
-28. Post Until: Date Posting will be removed. (Blank means post until filled)
-29. Posting Updated: Last Modification Date.
-30. Process Date: Dataset created date.
+1. Job ID (num): Job Opening ID.
+2. Agency (chr): Name of the City agency where the vacancy exists.
+3. Posting Type (chr): Internal or External job posting.
+4. #Of Positions (num): Number of vacancies to be filled.
+5. Business Title (chr): Business title
+6. Civil Service Title (chr): Civil Service title
+7. Title Classification (chr)	
+8. Title Code No (chr): Civil Service title Code
+9. Level (chr): Civil Service title level
+10. Job Category (chr)	
+11. Full-Time/Part-Time indicator (chr)
+12. Career Level (chr)	
+13. Salary Range From (num): Proposed salary from: range. (Can be 0)
+14. Salary Range To (num): Proposed salary to: range. (Can be 0)
+15. Salary Frequency (chr): Proposed salary frequency
+16. Work Location (chr): Agency location.
+17. Division/Work Unit (chr): Department/Division within the hiring agency.
+18. Job Description (chr): Description of the job responsibilities for this position.
+19. Minimum Qual Requirements (chr): Minimum qualifications required for position.
+20. Preferred Skills (chr): Preferred skills for this position.
+21. Additional Information (chr): Additional information provided by the hiring agency.
+22. To Apply (chr): Instructions on how to apply for this postion.
+23. Hours/Shift (chr): Working hours and shift information.
+24. Work Location 1 (chr): Specific work location for this opening.
+25. Recruitment Contact (logi): Recruitment contact information.
+26. Residency Requirement (chr): Residency requirements for this position.
+27. Posting Date (chr): Date that the position was posted.
+28. Post Until (chr): Date Posting will be removed. (Blank means post until filled)
+29. Posting Updated (chr): Last Modification Date.
+30. Process Date (chr): Dataset created date.
 
 The problem with this data is that there are some blank value and messy code. 
