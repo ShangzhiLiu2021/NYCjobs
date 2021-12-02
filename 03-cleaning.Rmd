@@ -1,1 +1,30 @@
 # Data transformation
+
+```{r}
+library(tidyverse)
+library(patchwork)
+library(readr)
+NYC_Jobs <- read_csv("NYC_Jobs.csv")
+
+jobs <- NYC_Jobs[ , -which(colnames(NYC_Jobs) %in% c("Title Code No", "Level", "Division/Work Unit", "Job Description", "Additional Information", "To Apply", "Recruitment Contact", "Posting Date", "Posting Updated", "Process Date"))]
+
+jobs=jobs%>% mutate(residency = case_when(
+    str_detect(`Residency Requirement`, "not required") ~ "not required",
+    str_detect(`Residency Requirement`, "required") ~ "required",
+    str_detect(`Residency Requirement`, "no residency") ~ "not required",
+    str_detect(`Residency Requirement`, "exempt") ~ "not required",
+    ))
+
+jobs=jobs%>% mutate(degreereq = case_when(
+    str_detect(`Minimum Qual Requirements`, "Master") ~ "master's degree",
+    str_detect(`Minimum Qual Requirements`, "master's degree") ~ "master's degree",
+    str_detect(`Minimum Qual Requirements`, "associate degree") ~ "associate degree",
+    str_detect(`Minimum Qual Requirements`, "baccalaureate degree") ~ "bachelor degree",
+    str_detect(`Minimum Qual Requirements`, "bachelor degree") ~ "bachelor degree",
+    str_detect(`Minimum Qual Requirements`, "high school") ~ "high school diploma",
+       str_detect(`Minimum Qual Requirements`, "doctorate") ~ "Doctorate",
+    ))
+
+
+```
+
