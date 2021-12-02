@@ -8,11 +8,11 @@ For these 30 variables:
 
 1. Job ID (num): Job Opening ID.
 2. Agency (chr): Name of the City agency where the vacancy exists.
-3. Posting Type (chr): Internal or External job posting.
+3. Posting Type (chr): Internal or External job posting. Internal postings available to city employees and external postings available to the general public are included.
 4. #Of Positions (num): Number of vacancies to be filled.
 5. Business Title (chr): Business title
 6. Civil Service Title (chr): Civil Service title
-7. Title Classification (chr):All Civil Service title are grouped into four categories
+7. Title Classification (chr):All Civil Service title are grouped into four categories: Competitive Class/Non-Competitive Class/Labor Class/Exempt Class.
 8. Title Code No (chr): Civil Service title Code
 9. Level (chr): Civil Service title level
 10. Job Category (chr)	
