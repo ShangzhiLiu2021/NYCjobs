@@ -141,7 +141,7 @@ df<-NYC_Jobs%>%select("Preferred Skills","Recruitment Contact","Additional Infor
 df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
 plot_missing(df,percent = TRUE)
 ```
-
+From above plot we can observed that there are 53 different patterns. There are no rows recorded as complete for all variables. The reason may be each job position is different. The most common pattern is missing of Recruitment Contact, hours shift, Post Until and location.
 
 From above plot, we can see that 100% of Recruitment Contact are missing, so we decide to drop this column.
 The hours/Shift have over 75% values are missing, and for those values that are not lost, they are very different from each other, and are also difficult for us to classify and compare, so we decide to remove this column.
