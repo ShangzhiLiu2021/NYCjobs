@@ -24,7 +24,7 @@
 <meta name="author" content="Yunxiao Wang, Shangzhi Liu" />
 
 
-<meta name="date" content="2021-12-01" />
+<meta name="date" content="2021-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,6 +101,9 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>From website <a href="https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t" class="uri">https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t</a>, we can directly downloaded the CSV file of this dataset. Then we use read_csv to get this dataset and store it as NYC_Jobs so that we can work with it in R.</p>
+<p>However, there are 30 variables in this dataset and some of them are not useful. For variable “Recruitment Contact”, all of its contents are empty in this dataset. For variables “Title Code No”, “Level”, “To Apply”, “Posting Date”, “Posting Updated”, “Process Date”, the information of their contents are not helpful for job seekers to find a suitable job. For variables “Division/Work Unit”, “Job Description”, “Additional Information”, according to the different job postings, their contents are very different, which are not conducive to analyze and create visualizations. Thus, we decided to delete these variables.</p>
+<p>In addition, we did data transformation in variables “Residency Requirement” and “Minimum Qual Requirements” to simplify their contents and convert them to information that we are interested in. From the information of variable “Residency Requirement”, we create a new variable “residency” to transform the original contents into “required” and “not required” which show whether this job postings need residency Requirement or not. Then from the information of variable “Minimum Qual Requirements”, we create a new variable “degreereq” to focus on the degree requirements from the original contents.</p>
 
 </div>
             </section>

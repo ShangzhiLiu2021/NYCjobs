@@ -3,7 +3,7 @@
 Our group collected the data together. It is from https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t.
 This dataset contains current job postings available on the City of New York’s official jobs site: http://www.nyc.gov/html/careers/html/search/search.shtml.
 
-This dataset has 2831 rows and 30 columns. Each row is a Job Posting from one company. Each column is one kind of information for each job posting.
+This dataset has 2838 rows and 30 columns. Each row is a Job Posting from one company. Each column is one kind of information for each job posting.
 For these 30 variables:
 
 1. Job ID (num): Job Opening ID.
@@ -37,4 +37,4 @@ For these 30 variables:
 29. Posting Updated (chr): Last Modification Date.
 30. Process Date (chr): Dataset created date.
 
-The problem with this data is that there are some blank value and messy code. 
+The problem with this data is that there are some blank value.
