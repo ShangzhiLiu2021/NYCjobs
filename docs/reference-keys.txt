@@ -3,5 +3,6 @@ data-sources
 data-transformation
 missing-values
 results
+section
 interactive-component
 conclusion

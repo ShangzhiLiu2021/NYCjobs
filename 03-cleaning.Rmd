@@ -31,6 +31,6 @@ jobs=jobs%>% mutate(degreereq = case_when(
        str_detect(`Minimum Qual Requirements`, "doctorate") ~ "Doctorate",
     ))
 
-
+# write.csv(x = jobs,file = "jobs.csv", row.names=FALSE)
 ```
 

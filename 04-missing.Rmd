@@ -6,7 +6,7 @@ library(readr)
 ```
 For convenience, we replace all empty value to NA first.
 ```{r}
-NYC_Jobs <- read_csv("NYC_Jobs.csv")
+NYC_Jobs <- read_csv("jobs.csv")
 NYC_Jobs[NYC_Jobs == ''] <- NA
 dim(NYC_Jobs)
 ```
@@ -35,7 +35,8 @@ p1 <- ggplot(tidycolum, aes(reorder(id, -missing_value),y=(missing_value/sumc)*1
                   geom_bar(stat = "identity",fill='dodgerblue', alpha=0.7) + 
                   ylab("% rows missing:") + ylim(0,100)+
                   xlab("")+
-                  ggtitle("Missing value patterns")
+                  ggtitle("Missing value patterns")+
+                  theme(axis.text.x=element_text(angle=45))
 
 tms <- missing_patterns %>% rownames_to_column("number")
 x=dim(tms)[2]-1
@@ -66,7 +67,8 @@ p1 <- ggplot(tidycolum, aes(reorder(id, -missing_value),missing_value))+
                   geom_bar(stat = "identity",fill='dodgerblue', alpha=0.7) + 
                   ylab("num rows missing:") + 
                   xlab("")+
-                  ggtitle("Missing value patterns")
+                  ggtitle("Missing value patterns")+
+                  theme(axis.text.x=element_text(angle=45))
 
 tms <- missing_patterns %>% rownames_to_column("number")
 x=dim(tms)[2]-1
@@ -110,7 +112,9 @@ p3 <- ggplot(tms_tm1, aes(x = reorder(key,-missing_value), y = reorder(number,-i
           xlab("variables")+
           ylab("missing patterns")+
           theme(legend.position="none")+
-          annotate("text", x_location, y_location, label = "complete cases")
+          annotate("text", x_location, y_location, label = "complete cases")+ 
+          theme(axis.text.x=element_text(angle=45))
+
 
 
 
@@ -125,8 +129,8 @@ Our dataset has 2838 rows and 30 columns.
 
 We want to check if there is any missing value in our NYC job dataset.
 ```{r,echo=FALSE}
-jobs<-NYC_Jobs
-col<-colSums(is.na(jobs)) %>% sort(decreasing = TRUE)
+jobData <-NYC_Jobs
+col<-colSums(is.na(jobData)) %>% sort(decreasing = TRUE)
 coll<-data.frame(col)
 coll
 ```
@@ -136,10 +140,12 @@ We can see that there are total 12 columns have missing values. We decide to ign
 We choose 7 columns that have more than 1% missing values to draw the missing pattern graph
 
 ```{r fig1, fig.height = 10, fig.width = 10,message=FALSE,echo=FALSE}
-df<-NYC_Jobs%>%select("Preferred Skills","Recruitment Contact","Additional Information", "Hours/Shift" ,"Work Location 1","Business Title","Post Until", "Full-Time/Part-Time indicator")
+df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Business Title","Post Until", "Full-Time/Part-Time indicator")
 
-df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
-plot_missing(df,percent = TRUE)
+
+# df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
+plot_missing(df,percent = FALSE)
+
 ```
 From above plot we can observed that there are 53 different patterns. There are no rows recorded as complete for all variables. The reason may be each job position is different. The most common pattern is missing of Recruitment Contact, hours shift, Post Until and location.
 
@@ -153,9 +159,15 @@ For other variables, we will determine how to deal with them after we finish dat
 ```{r fig2, fig.height = 5, fig.width = 10,message=FALSE,echo=FALSE}
 c <- seq(1,2838,by = 188)
 df16 <- df[c,]
-tidydf16 <- df16 %>% gather(key, value, -title, -RecruCon, -Info, -loc, -FTPT) %>% mutate(missing = ifelse(is.na(value), "yes", "no"))
-ggplot(tidydf16, aes(x = key, y = fct_rev(title), fill = missing )) + geom_tile(color = "white") + scale_fill_viridis_d() + theme_bw()+ylab('Business Title')+xlab("")
+tidydf16 <- df16 %>% gather(key, value, -"Business Title", -"Work Location 1", -"Full-Time/Part-Time indicator") %>% mutate(missing = ifelse(is.na(value), "yes", "no"))
+ggplot(tidydf16, aes(x = key, y = fct_rev(tidydf16$`Business Title`), fill = missing )) + geom_tile(color = "white") + scale_fill_viridis_d() + theme_bw()+ylab('Business Title')+xlab("") 
+
 ```
 
 Since Business title is one of the most important variables,we choose some records to analyze the relationship and check if our decision is right.
+
+```{r}
+finalJobs <- NYC_Jobs[ , -which(colnames(NYC_Jobs) %in% c("Hours/Shift" ,"Work Location 1"))]
+# write.csv(x = finalJobs,file = "finalJobs.csv", row.names = FALSE)
+```
 
