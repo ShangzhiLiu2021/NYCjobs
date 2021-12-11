@@ -8,7 +8,90 @@ library(ggplot2)
 ```
 
 ```{r}
-finalJobs <- read_csv("finalJobs.csv")
+job <- read_csv("finalJobs.csv")
 ```
 
 ## 
+
+```{r}
+categorytrans <-job%>%select(`Job Category`, `Job ID`) %>% mutate(`Job Category` = as.character(`Job Category`),`Job Category` = gsub("([A-Za-z]+).*", "\\1", job$`Job Category`))
+
+categorytrans$'Job Category'[which(categorytrans$`Job Category` == "Constituent")] <- "Constituent Services"
+
+category <-
+  as.data.frame(categorytrans["Job Category"]) %>%
+  filter(!is.na(`Job Category`)) %>%
+  group_by(`Job Category`) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+  
+ggplot(category, aes(x = fct_reorder(`Job Category`,count), y = count)) +
+  geom_col(color = "white", fill = "dodgerblue") +
+  ggtitle("Most Major Job Category") +
+  labs(x = "Category", y = "Count") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  coord_flip()
+```
+
+```{r}
+job$category = categorytrans$`Job Category`
+job=job%>%filter(!is.na(category))
+```
+
+```{r}
+Annualjob=job[job$`Salary Frequency`=="Annual",]
+ggplot(Annualjob,aes(x = reorder(category,`Salary Range From`,FUN=median), y = `Salary Range From`/1000)) +
+geom_boxplot( fill = "dodgerblue") +
+ggtitle("Min Annual Salaries range by Job Categories") + 
+labs(x = "Job Category", y = "Min Annual Salary(unit: 1,000 usd)") + 
+ylim(c(0,200))+
+theme(plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+```
+
+```{r}
+Annualjob=Annualjob%>%filter(!is.na(degreereq))
+ggplot(Annualjob,aes(x = reorder(degreereq,`Salary Range From`,FUN=median), y = `Salary Range From`/1000)) +
+geom_boxplot( fill = "dodgerblue") +
+ggtitle("Min Annual Salaries range by degree") + 
+labs(x = "Degree requirement", y = "Min Annual Salary(unit: 1,000 usd)") + 
+ylim(c(0,200))+
+theme(plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+
+```
+
+```{r}
+categ = job %>% filter(job$'Career Level' %in% c("Entry-Level", "Executive", "Experienced (non-manager)", "Manager", "Student")) %>% filter(!is.na(category)) %>% count(category, job$'Career Level')
+
+total_categ = job %>% filter(job$'Career Level' %in% c("Entry-Level", "Executive", "Experienced (non-manager)", "Manager", "Student")) %>% filter(!is.na(category)) %>% count(category)
+
+most_categ = total_categ[order(total_categ$n, decreasing = TRUE),]
+
+sort_categ = categ %>% filter(category %in% most_categ$category)
+
+ggplot(most_categ, aes(x = n, y = fct_reorder(category,n))) + geom_point(color = "blue") + ggtitle("category and Career Level") + ylab("") + theme_linedraw() + geom_point(data = sort_categ, aes(x=n, y=category))
+```
+
+```{r}
+jobs=job%>% mutate(llevel = case_when(
+    str_detect(`Career Level`, "Manager") ~ "Manager",
+    str_detect(`Career Level`, "Entry-Level") ~ "Entry-Level",
+    str_detect(`Career Level`, "Executive") ~ "Executive",
+    str_detect(`Career Level`, "Experienced") ~ "Experienced",
+    ))
+jobs=jobs%>%filter(!is.na(llevel)) %>%filter(!is.na(degreereq))
+```
+
+```{r fig3, fig.height = 5, fig.width = 10,message=FALSE}
+library(RColorBrewer)
+library(ggmosaic)
+jobs$degreereq = fct_relevel(jobs$degreereq, "high school diploma", "associate degree", "bachelor degree","master's degree","Doctorate")
+jobs$llevel = fct_relevel(jobs$llevel, "Student", "Entry-Level", "Experienced","Manager","Executive")
+
+ggplot(data = jobs) +
+  geom_mosaic(aes(x = product(degreereq,llevel),fill=degreereq)) + 
+  labs(title='')+ scale_fill_brewer(palette = "Blues")+xlab('Career Level')+ylab('Degree Requirement')
+```
+
+
