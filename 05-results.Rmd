@@ -94,4 +94,11 @@ ggplot(data = jobs) +
   labs(title='')+ scale_fill_brewer(palette = "Blues")+xlab('Career Level')+ylab('Degree Requirement')
 ```
 
+```{r}
+D3jobs = job %>% mutate(minSalary = case_when(job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 25000 ~ "0-25k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 50000 & job$`Salary Range From` > 25000 ~ "25k-50k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 75000 & job$`Salary Range From` > 50000 ~ "50k-75k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 100000 & job$`Salary Range From` > 75000 ~ "75k-100k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` > 100000 ~ ">100k"))
+
+D3jobs = D3jobs %>% filter(!is.na(minSalary))
+# write.csv(x = D3jobs, file = "D3jobs.csv", row.names=FALSE)
+```
+
 
