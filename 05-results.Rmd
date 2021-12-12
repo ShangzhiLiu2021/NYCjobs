@@ -216,7 +216,8 @@ In this graph,
 
 ## Word Cloud for Preferred Skills
 
-In the last section, we will focus on the keywords that appear in the variable "Preferred Skills" from the whole job posting dataset. 
+We noticed that each job has a specific long paragraph to describe the Preferred Skills,  so we will focus on the keywords that appear in  Preferred Skills from the whole job posting dataset.  By split all words and drop all meaningfuless word like conjunctions, numbers and symbols, we generate a worldcloud with 
+100 most frequent words.
 
 ```{r}
 
