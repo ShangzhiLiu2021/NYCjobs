@@ -136,7 +136,7 @@ In this graph, we show the amount of full-time jobs and the amount of part-time 
 
 ## Degree requirement and Career Level
 
-In this section, we focus on analyzing the two most important requirements that job seekers will pay attention to when they look through these job postings: Degree requirement and Career Level. We want to know whether a higher career level can substitute for higher degree level, or whether higher degree level can substitute for higher career level?
+In this section, we focus on analyzing the two most important requirements that job seekers will pay attention to when they look through these job postings: Degree requirement and Career Level. We want to know whether a higher career level can substitute for higher degree level?
 
 ```{r}
 jobs=job%>% mutate(llevel = case_when(
@@ -159,7 +159,7 @@ ggplot(data = jobs) +
   labs(title='')+ scale_fill_brewer(palette = "Blues")+xlab('Career Level')+ylab('Degree Requirement')
 ```
 
-
+In this mosaic graph, it shows when career level changes from entry-level to executive (from low level to high level), the percent of high school diploma requirement become smaller and smaller, and the percent of master's degree requirement become larger and larger. The percent of Doctorate requirement is very low for all of these career levels. Also, the percents of bachelor degree requirement and associate degree requirement are similar in career levels "entry-level", "Experienced", and "Manager".
 
 ```{r}
 
