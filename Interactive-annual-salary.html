@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=false"
+    />
+    <title></title>
+    <style>
+      rect:hover {
+        fill: yellow;
+      }
+    </style>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+  <body>
+    <h1>Annual Salary</h1>
+    <main style="width: 40vw; height: 60vh" id="viz"></main>
+    <div class="btndiv"></div>
+    <script>
+      class Bar {
+        constructor(id, data) {
+          this.data = data;
+          this.div = id;
+          this.x_field = 'Count of Number';
+          this.y_field = 'Annual Salary';
+          this.add_svg();
+          this.update_chart();
+        }
+
+        add_svg() {
+          this.add_margin();
+          this.add_chart_area();
+          this.add_label();
+          d3.select('body')
+            .append('div')
+            .style('display', 'none')
+            .attr('position', 'absolute')
+            .attr('class', 'd3-tip');
+        }
+
+        add_margin() {
+          const div = d3.select(`#${this.div}`);
+          div.selectAll('*').remove();
+          this.getWH(div);
+          this.margin = {
+            left: 80,
+            right: 20,
+            top: 60,
+            bottom: 60,
+          };
+          this.innerW =
+            this.width -
+            this.margin.left -
+            this.margin.right;
+          this.innerH =
+            this.height -
+            this.margin.top -
+            this.margin.bottom;
+          this.svg = div
+            .append('svg')
+            .attr('width', this.width)
+            .attr('height', this.height);
+        }
+
+        add_chart_area() {
+          this.ChartArea = this.svg
+            .append('g')
+            .attr(
+              'transform',
+              `translate(${this.margin.left},${this.margin.top})`
+            );
+          this.draw_area = this.ChartArea.append('g');
+          this.AxisY = this.ChartArea.append('g');
+          this.AxisX = this.ChartArea.append('g').attr(
+            'transform',
+            `translate(0,${this.innerH})`
+          );
+        }
+        add_label() {
+          this.ChartArea.selectAll('.x_label')
+            .data([0])
+            .join('text')
+            .attr('class', 'x_label')
+            .attr(
+              'transform',
+              `translate(${this.innerW / 2},${
+                this.innerH + 30
+              })`
+            )
+            .text(this.x_field);
+          // y1
+          this.ChartArea.selectAll('.y_label')
+            .data([0])
+            .join('text')
+            .attr('class', 'y_label')
+            .attr(
+              'transform',
+              `translate(-60,0)  rotate(0)`
+            )
+            .text(this.y_field);
+        }
+
+        add_axis() {
+          this.AxisX.transition()
+            .delay(200)
+            .call(d3.axisBottom(this.x));
+          this.AxisY.transition()
+            .delay(200)
+            .call(d3.axisLeft(this.y));
+        }
+
+        tips_show(e, v, html) {
+          d3.select('.d3-tip')
+            .style('display', 'block')
+            .style('position', 'absolute')
+            .style('top', e.pageY + 'px')
+            .style('left', e.pageX + 'px')
+            .style('background-color', 'white')
+            .style('padding', '5px')
+            .html(html);
+        }
+        tips_hide() {
+          d3.select('.d3-tip').style('display', 'none');
+        }
+        update_chart() {
+          this.update_data();
+          this.add_scale();
+          this.add_axis();
+          this.draw_chart();
+        }
+
+        getWH(node) {
+          this.width =
+            node.node().getBoundingClientRect().width * 0.9;
+          this.height =
+            node.node().getBoundingClientRect().height *
+            0.9;
+        }
+
+        add_scale() {
+          this.x = d3
+            .scaleLinear()
+            .domain([0, d3.max(this.bar_data, (d) => d[1])])
+            .range([0, this.innerW]);
+          this.y = d3
+            .scaleBand()
+            .domain(this.bar_data.map((d) => d[0]))
+            .range([0, this.innerH])
+            .padding(0.3);
+        }
+        update_data() {
+          let salary = {
+            '0-25k': 1,
+            '25k-50k': 2,
+            '>100k': 5,
+            '50k-75k': 3,
+            '75k-100k': 4,
+          };
+
+          this.data.sort((a, b) => {
+            return salary[a.minSalary] > salary[b.minSalary]
+              ? 1
+              : -1;
+          });
+
+          this.bar_data = d3.rollups(
+            this.data,
+            (d) => d.length,
+            (d) => d.minSalary
+          );
+          console.log(this.bar_data);
+          this.bar_data_cate = d3.rollups(
+            this.data,
+            (d) => d.length,
+            (d) => d.category,
+            (d) => d.minSalary
+          );
+        }
+        draw_chart() {
+          this.ChartArea.selectAll('rect')
+            .data(this.bar_data)
+            .join('rect')
+            .attr('class', (d) => d[0])
+            .attr('x', (d) => 0)
+            .attr('y', (d) => this.y(d[0]))
+            .attr('height', this.y.bandwidth())
+            .attr('width', (d) => this.x(d[1]))
+            .attr('stroke', 'black')
+            .attr('stroke-width', '0.25')
+            .attr('fill', '#f7d495')
+            .on('mouseover', (e, d) => {
+              let html = `${d[0]} ${d[1]} `;
+
+              this.tips_show(e, d, html);
+            })
+            .on('mouseout', this.tips_hide);
+        }
+      }
+
+      async function init() {
+        const data = await d3.csv(
+          'https://raw.githubusercontent.com/ShangzhiLiu2021/NYCjobs/main/D3jobs.csv'
+        );
+        console.log(data);
+        new Bar('viz', data);
+
+        const add_btns = () => {
+          const cates = d3
+            .groups(data, (d) => d.category)
+            .map((d) => d[0]);
+          cates.unshift('All');
+          d3.select('.btndiv')
+            .selectAll('button')
+            .data(cates)
+            .join('button')
+            .html((d) => d)
+            .on('click', (e, v) => {
+              d3.select('h1').html('Annual Salary --' + v);
+              let _data;
+              if (v === 'All') {
+                _data = data;
+              } else {
+                _data = data.filter(
+                  (d) => d.category === v
+                );
+              }
+              console.log(_data);
+              new Bar('viz', _data);
+            });
+        };
+        add_btns();
+      }
+
+      init();
+    </script>
+  </body>
+</html>
