@@ -43,4 +43,7 @@ word3
 wordcloud2(word3,size = 2)
 ```
 
-<iframe width="700" height="547" src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="" frameborder="0" ></iframe>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800"></iframe>
+
+
