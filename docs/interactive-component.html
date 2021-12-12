@@ -24,7 +24,7 @@
 <meta name="author" content="Yunxiao Wang, Shangzhi Liu" />
 
 
-<meta name="date" content="2021-12-10" />
+<meta name="date" content="2021-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,11 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 
 
 
@@ -79,7 +84,9 @@
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#section"><i class="fa fa-check"></i><b>5.1</b> </a></li>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#most-major-job-category"><i class="fa fa-check"></i><b>5.1</b> Most major job category</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#relationship-of-salary-category-and-salary-degree-requirement"><i class="fa fa-check"></i><b>5.2</b> Relationship of Salary &amp; Category and Salary &amp; Degree Requirement</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#section"><i class="fa fa-check"></i><b>5.3</b> 5.5</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -104,6 +111,22 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
+<pre><code>## # A tibble: 87 x 2
+##    word           freq
+##    &lt;chr&gt;         &lt;int&gt;
+##  1 experience      640
+##  2 ability         403
+##  3 design          358
+##  4 knowledge       306
+##  5 construction    262
+##  6 strong          256
+##  7 management      241
+##  8 communication   231
+##  9 project         204
+## 10 excellent       200
+## # ... with 77 more rows</code></pre>
+<div id="htmlwidget-cbec01c0eef225539298" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbec01c0eef225539298">{"x":{"word":["experience","ability","design","knowledge","construction","strong","management","communication","project","excellent","written","york","engineering","projects","candidates","preferred","software","microsoft","office","including","license","technical","excel","verbal","standards","writing","proficiency","planning","demonstrated","multiple","analysis","related","valid","time","organizational","autocad","contract","plans","development","word","candidate","field","applications","computer","effectively","drawings","public","systems","city","powerpoint","requirements","specifications","complex","suite","interpersonal","professional","familiarity","possess","proficient","reports","facilities","manage","practices","water","data","review","required","building","code","issues","deadlines","preference","urban","leadership","analytical","motor","staff","drivera","electrical","meet","structural","application","environment","operations","shop","site","team"],"freq":[640,403,358,306,262,256,241,231,204,200,175,162,152,150,146,139,138,133,132,128,123,121,120,119,117,110,105,102,100,100,99,97,96,92,91,88,88,84,82,81,80,80,79,79,78,75,73,73,72,72,72,72,71,71,70,70,68,68,68,65,64,63,63,63,62,62,61,60,60,60,59,59,58,57,56,54,54,51,51,51,50,49,49,47,47,47,47],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.5625,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 
 </div>
             </section>

@@ -3,6 +3,8 @@ data-sources
 data-transformation
 missing-values
 results
+most-major-job-category
+relationship-of-salary-category-and-salary-degree-requirement
 section
 interactive-component
 conclusion

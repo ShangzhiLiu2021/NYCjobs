@@ -11,7 +11,9 @@ library(ggplot2)
 job <- read_csv("finalJobs.csv")
 ```
 
-## 
+## Most major job category
+
+To help job seekers realize how many job postings are available for each job category and the competitiveness of various categories of jobs so that they can choose a more suitable job, We want to know the demand for different categories of jobs in New York city. From this job posting data variable "Job Category", for each job posting, our group extract the job category that can best represent the job, and store them and their counts in a new data frame "category".
 
 ```{r}
 categorytrans <-job%>%select(`Job Category`, `Job ID`) %>% mutate(`Job Category` = as.character(`Job Category`),`Job Category` = gsub("([A-Za-z]+).*", "\\1", job$`Job Category`))
@@ -33,10 +35,16 @@ ggplot(category, aes(x = fct_reorder(`Job Category`,count), y = count)) +
   coord_flip()
 ```
 
+From the graph above, we can find that the number of job posting for "Technology" is largest, which is more than 450, and the number of job posting for "Clerical" is smallest. For "Technology", "Constituent Services", and "Engineering", these three job categories have the top three number of job postings. If people want to choose jobs from these categories, they will have more choices than people who choose from "Social", "Information", and "Clerical".
+
 ```{r}
 job$category = categorytrans$`Job Category`
 job=job%>%filter(!is.na(category))
 ```
+
+## Relationship of Salary & Category and Salary & Degree Requirement
+
+For people who are finding jobs, the number of salary is always one of the most important information they are interested in. To make our graphs more useful and not to disappoint the job seekers, we choose the lower bound of salary range from each job posting whose salary frequency is annual as the value of salary. Then we create the box plots related to salary & job category and related to salary & degree requirement.
 
 ```{r}
 Annualjob=job[job$`Salary Frequency`=="Annual",]
@@ -48,6 +56,8 @@ ylim(c(0,200))+
 theme(plot.title = element_text(hjust = 0.5)) +
   coord_flip()
 ```
+
+From the graph above, 
 
 ```{r}
 Annualjob=Annualjob%>%filter(!is.na(degreereq))
@@ -61,17 +71,42 @@ theme(plot.title = element_text(hjust = 0.5)) +
 
 ```
 
+
 ```{r}
-categ = job %>% filter(job$'Career Level' %in% c("Entry-Level", "Executive", "Experienced (non-manager)", "Manager", "Student")) %>% filter(!is.na(category)) %>% count(category, job$'Career Level')
+cleveland2 <- job%>%select(`category`, `Job ID`,`residency`) %>%
+  drop_na(`residency`) %>%group_by(`category`,`residency`) %>%
+  summarise(count = n()) 
 
-total_categ = job %>% filter(job$'Career Level' %in% c("Entry-Level", "Executive", "Experienced (non-manager)", "Manager", "Student")) %>% filter(!is.na(category)) %>% count(category)
+cleveland2<-cleveland2%>%pivot_wider(names_from = `residency`, values_from = count) %>%
+  mutate(Total=`required`+`not required`) %>%
+  ungroup() %>%
+  pivot_longer(cols=!`category`, names_to="type", values_to="count") 
+cleveland2[is.na(cleveland2)] <- 0
+cleveland2$count[which(cleveland2$type == "Total"&cleveland2$category == 'Information')] <- 17
+cleveland2$count[which(cleveland2$type == "Total"&cleveland2$category == 'Clerical')] <- 10
+ggplot(cleveland2,aes(x=count,y=fct_reorder2(`category`,type== "Total",count,.desc=FALSE),color = type)) + 
+  geom_point() +  
+  ggtitle("Residency Requirement for Job Category") +
+  ylab("") +
+  theme(plot.title = element_text(hjust = 0.5))
 
-most_categ = total_categ[order(total_categ$n, decreasing = TRUE),]
-
-sort_categ = categ %>% filter(category %in% most_categ$category)
-
-ggplot(most_categ, aes(x = n, y = fct_reorder(category,n))) + geom_point(color = "blue") + ggtitle("category and Career Level") + ylab("") + theme_linedraw() + geom_point(data = sort_categ, aes(x=n, y=category))
 ```
+
+```{r}
+cfjob = job %>% filter(!is.na(`Full-Time/Part-Time indicator`)) 
+
+categ1 = cfjob %>% filter(`Full-Time/Part-Time indicator` %in% c("F", "P")) %>% filter(!is.na(category)) %>% count(category, `Full-Time/Part-Time indicator`)
+
+total_categ1 = cfjob %>% filter(`Full-Time/Part-Time indicator` %in% c("F", "P")) %>% filter(!is.na(category)) %>% count(category)
+
+most_categ1 = total_categ1[order(total_categ1$n, decreasing = TRUE),]
+
+sort_categ1 = categ1 %>% filter(category %in% most_categ1$category)
+
+ggplot() + geom_point(data = sort_categ1, aes(x=n, y=fct_reorder2(`category`,`Full-Time/Part-Time indicator`== "F",n,.desc=FALSE)
+, color = `Full-Time/Part-Time indicator`)) + ggtitle("category and Full time / Part time job") + ylab("")
+```
+
 
 ```{r}
 jobs=job%>% mutate(llevel = case_when(
@@ -94,6 +129,9 @@ ggplot(data = jobs) +
   labs(title='')+ scale_fill_brewer(palette = "Blues")+xlab('Career Level')+ylab('Degree Requirement')
 ```
 
+
+## 5.5
+
 ```{r}
 D3jobs = job %>% mutate(minSalary = case_when(job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 25000 ~ "0-25k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 50000 & job$`Salary Range From` > 25000 ~ "25k-50k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 75000 & job$`Salary Range From` > 50000 ~ "50k-75k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 100000 & job$`Salary Range From` > 75000 ~ "75k-100k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` > 100000 ~ ">100k"))
 
@@ -101,4 +139,57 @@ D3jobs = D3jobs %>% filter(!is.na(minSalary))
 # write.csv(x = D3jobs, file = "D3jobs.csv", row.names=FALSE)
 ```
 
+```{r}
+library(ggridges)
+ggplot(job, aes(x=`Salary Range From` / 1000, y=`Title Classification`)) + geom_density_ridges(alpha=0.6) + xlab("salary range from (unit: 1000 dollar)")
+```
 
+```{r}
+scatter=job%>%select(`category`, `Job ID`,`Posting Type`) %>%
+  drop_na(`Posting Type`) %>%group_by(`category`,`Posting Type`) %>%
+  summarise(count = n()) %>%pivot_wider(names_from = `Posting Type`, values_from = count) 
+
+scatter<- scatter %>% 
+  mutate(type = case_when(External>Internal*0.8~ "External ",
+                          External<Internal*0.6 ~ "Internal",
+                          External>Internal*0.6&External<Internal*0.8 ~ "Neutral"))
+library(ggrepel)
+
+scatter[is.na(scatter)] <- 0
+ggplot(scatter,aes(External, Internal,color=type)) + geom_point()+geom_label_repel(aes(label = scatter$category), size = 3) +
+  xlab("External count") +
+  ylab("Internal count")
+```
+
+```{r}
+
+
+library(dplyr); 
+library(tidytext); 
+wordJobs<-job
+
+wordc<-wordJobs%>%
+  unnest_tokens(input = `Preferred Skills`, output = word)%>%
+  select(word)%>%
+  anti_join(stop_words)%>%
+  group_by(word)%>%
+  summarize(freq = n())%>%
+  ungroup()%>%
+  arrange(desc(freq))%>%
+  top_n(100)
+
+wordc<-wordc%>%
+  filter(word!='e9')
+wordc<-wordc%>%
+  filter(word!='1', word!='0',word!='2'
+         ,word!='3',word!='4',word!='5'
+         ,word!='6',word!='7',word!='8'
+         ,word!='9',word!='10',word!='0080',word!='00a1',word!='0099')
+
+
+
+library(wordcloud2)
+#wordc include word and word frequency
+wordcloud2(wordc,size = 2)
+ 
+```
