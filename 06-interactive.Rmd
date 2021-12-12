@@ -42,3 +42,5 @@ word3
 
 wordcloud2(word3,size = 2)
 ```
+
+<iframe width="700" height="547" src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="" frameborder="0" ></iframe>

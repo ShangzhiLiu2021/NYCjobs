@@ -5,6 +5,10 @@ missing-values
 results
 most-major-job-category
 relationship-of-salary-category-and-salary-degree-requirement
-section
+residency-requirement-and-full-time-part-time-job-indicator
+degree-requirement-and-career-level
+title-classification
+external-and-internal
+word-cloud-for-preferred-skills
 interactive-component
 conclusion

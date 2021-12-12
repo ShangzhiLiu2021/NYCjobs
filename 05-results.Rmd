@@ -50,20 +50,22 @@ For people who are finding jobs, the number of salary is always one of the most 
 Annualjob=job[job$`Salary Frequency`=="Annual",]
 ggplot(Annualjob,aes(x = reorder(category,`Salary Range From`,FUN=median), y = `Salary Range From`/1000)) +
 geom_boxplot( fill = "dodgerblue") +
-ggtitle("Min Annual Salaries range by Job Categories") + 
+ggtitle("Min Annual Salaries by Job Categories") + 
 labs(x = "Job Category", y = "Min Annual Salary(unit: 1,000 usd)") + 
 ylim(c(0,200))+
 theme(plot.title = element_text(hjust = 0.5)) +
   coord_flip()
 ```
 
-From the graph above, 
+From the graph above, we can find except job categories "Clerical" and "Information", for each other job category, there are some outliers in its salary distribution. What's more, this graph shows that for those job postings whose job categories are "Technology" and "Information", the amount of salary people can get is generally higher than those job postings whose job categories are "Social" and "Clerical". In particular, for job category "Clerical", the amount of salary people can get is generally lower than any other categories of job. 
+
+Combining with the first graph "Most Major Job Category" in section 5.1, we can notice that job category "Technology" not only has the largest variety of job postings, but also has better salary distribution than other job categories. For job category "Clerical", it has the smallest variety of job postings and the almost worst salary distribution. However, more variety of job postings does not always equal to better salary. For job category "Information", although it has the second lowest number of job postings, it ranks second in term of salary. In contrast, for job category "Constituent Services", although it ranks second in the number of job postings, it has the third lowest salary.
 
 ```{r}
 Annualjob=Annualjob%>%filter(!is.na(degreereq))
 ggplot(Annualjob,aes(x = reorder(degreereq,`Salary Range From`,FUN=median), y = `Salary Range From`/1000)) +
 geom_boxplot( fill = "dodgerblue") +
-ggtitle("Min Annual Salaries range by degree") + 
+ggtitle("Min Annual Salaries by degree") + 
 labs(x = "Degree requirement", y = "Min Annual Salary(unit: 1,000 usd)") + 
 ylim(c(0,200))+
 theme(plot.title = element_text(hjust = 0.5)) +
@@ -71,6 +73,27 @@ theme(plot.title = element_text(hjust = 0.5)) +
 
 ```
 
+From this graph, it shows a trend that except "Doctorate" (since the number of job postings whose degree requirement needs "Doctorate" is very small), the higher the degree requirement, the higher the salary. For job postings that need master's degree, the median of minimum annual salary is around 75000. But for those job postings that need associate degree, the median of minimum annual salary is just around 50000. Therefore, it is always beneficial for job seekers to improve their education level before looking for a job. 
+
+```{r}
+Annualjob$averageSalary=(Annualjob$`Salary Range To`+Annualjob$`Salary Range From`)/2
+linerange<-Annualjob%>%select(`category`, averageSalary) %>%
+  drop_na(averageSalary) %>%group_by(`category`) %>%summarise(meanvalue= mean(averageSalary)) 
+
+ggplot() + 
+  geom_linerange(data=Annualjob, aes(x=reorder(category,-averageSalary,FUN=mean), ymin=`Salary Range From`/1000, ymax=`Salary Range To`/1000), width=0.2, size=1, color="dodgerblue") +  
+  geom_point(data=linerange, aes(x=category, y=linerange$meanvalue/1000), size=4, shape=21, fill="white")+
+  theme(axis.text.x=element_text(angle=30))+
+  ggtitle('Annual Salary range by Job category')+
+  xlab('Job Category')+
+  ylab('Salary Range(unit: 1,000 usd)')
+```
+
+Sometimes it is not enough for job seekers to just know the information of minimum salary. Here we plot this graph to show the mean salary, the maximum salary, and the minimum salary job seekers can get from each job category. Combining with the first graph "Min Annual Salaries by Job Categories" in section 5.2, for job categories "Engineering", "Administration", "Constituent Services", "Building", "Finance", and "Social", they rank higher based on mean salary than they rank based on median of minimum salary. However, for job category "Legal", although it ranks third in terms of median minimum salary, it has the second lowest number of mean salary, and the value of its mean salary is close to its median of minimum salary. This information shows job seekers who want to work in "Legal" job category can get a better minimum salary guarantee, but the salary they eventually get will not change much.
+
+## Residency requirement and Full-Time / Part-Time job indicator
+
+Although this dataset contains the job postings available in New York City, some job postings are not available for all job seekers in New York City since there exists some job postings that need New York city residency requirement. Furthermore, some job postings are not suitable for job seekers who just want to find a full-time job or just want to get a part-time job. In this section, we will analyze the residency requirement and the full-time / part-time indicator in these job postings. We group all job postings according to their job categories.
 
 ```{r}
 cleveland2 <- job%>%select(`category`, `Job ID`,`residency`) %>%
@@ -92,6 +115,8 @@ ggplot(cleveland2,aes(x=count,y=fct_reorder2(`category`,type== "Total",count,.de
 
 ```
 
+In this graph, for each job category, it shows the amount of job postings that require the residency requirement and the amount that do not require, and the total amount. We can find for job category "Information", all of its job postings do not have residency requirement, and for job category "Clerical", all of its job postings need residency requirement. What's more, we notice that for most of the job categories, the amount of "required" is greater than the amount of "not required". Only in job categories "Technology", "Engineering", and "Information", the amount of job postings that do not require New York residency requirement is greater than the amount that require. This information shows now New York City provide a convenient employment environment for some international students whose major is about "Technology" or "Engineering". 
+
 ```{r}
 cfjob = job %>% filter(!is.na(`Full-Time/Part-Time indicator`)) 
 
@@ -107,6 +132,11 @@ ggplot() + geom_point(data = sort_categ1, aes(x=n, y=fct_reorder2(`category`,`Fu
 , color = `Full-Time/Part-Time indicator`)) + ggtitle("category and Full time / Part time job") + ylab("")
 ```
 
+In this graph, we show the amount of full-time jobs and the amount of part-time jobs for each job category. It shows for job categories "Information" and "Clerical", they just have full-time jobs. For all job categories, the amount of full-time jobs are greater than the amount of part-time job. It means that full-time work seems to have gone mainstream in New York. What's more, we can find job category "Health" has the most number of part-time jobs. Thus, if you prefer to find a part-time in New York, "Health" category can provide more choices to you.
+
+## Degree requirement and Career Level
+
+In this section, we focus on analyzing the two most important requirements that job seekers will pay attention to when they look through these job postings: Degree requirement and Career Level. We want to know whether a higher career level can substitute for higher degree level, or whether higher degree level can substitute for higher career level?
 
 ```{r}
 jobs=job%>% mutate(llevel = case_when(
@@ -130,7 +160,24 @@ ggplot(data = jobs) +
 ```
 
 
-## 5.5
+
+```{r}
+
+jobs=jobs%>% mutate(posttype = case_when(
+    str_detect(`Posting Type`, "External") ~ "External",
+    str_detect(`Posting Type`, "Internal") ~ "Internal",
+    ))
+jobs=jobs%>%filter(!is.na(llevel)) %>%filter(!is.na(degreereq))%>%filter(!is.na(residency))
+ggplot(data = jobs) +
+  geom_mosaic(aes(x = product(degreereq,posttype),fill=degreereq)) + 
+  labs(title='')+ scale_fill_brewer(palette = "")+xlab('Posting Type')+ylab('Degree Requirement')+
+  theme(axis.text.x=element_text(angle=30))+
+  facet_grid(. ~residency)+
+  ggtitle('Degree requirement ~ Posting type facet on Residency Requirement')
+```
+
+
+## Title Classification
 
 ```{r}
 D3jobs = job %>% mutate(minSalary = case_when(job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 25000 ~ "0-25k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 50000 & job$`Salary Range From` > 25000 ~ "25k-50k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 75000 & job$`Salary Range From` > 50000 ~ "50k-75k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 100000 & job$`Salary Range From` > 75000 ~ "75k-100k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` > 100000 ~ ">100k"))
@@ -143,6 +190,10 @@ D3jobs = D3jobs %>% filter(!is.na(minSalary))
 library(ggridges)
 ggplot(job, aes(x=`Salary Range From` / 1000, y=`Title Classification`)) + geom_density_ridges(alpha=0.6) + xlab("salary range from (unit: 1000 dollar)")
 ```
+
+## External and Internal
+
+Except the New York residency requirement, these job postings have another restriction variable "Posting Type" whose meaning is internal or external job posting. And the dataset claims that internal postings available to city employees and external postings available to the general public are included. To find more information about internal and external, we create a scatter plot to show the relationship between job category and this posting type.
 
 ```{r}
 scatter=job%>%select(`category`, `Job ID`,`Posting Type`) %>%
@@ -160,6 +211,12 @@ ggplot(scatter,aes(External, Internal,color=type)) + geom_point()+geom_label_rep
   xlab("External count") +
   ylab("Internal count")
 ```
+
+In this graph,
+
+## Word Cloud for Preferred Skills
+
+In the last section, we will focus on the keywords that appear in the variable "Preferred Skills" from the whole job posting dataset. 
 
 ```{r}
 
