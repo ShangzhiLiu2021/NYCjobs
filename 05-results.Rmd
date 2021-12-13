@@ -232,7 +232,7 @@ ggplot(scatter,aes(External, Internal,color=type)) + geom_point()+geom_label_rep
 ```
 
 In this graph, for each job category, we set some categories are more "external" if its number of external job postings is greater than the number of internal job postings times 0.8, some categories are more "internal" if its number of external job postings is less than the number of internal job postings times 0.6, and else categories are "neutral".
-From the graph, we can find for job categories "Clerical", "Social", and "Administration", these categories are more "internal". For job categories "Information", "Policy", "Public", "Legal", and "Constituent Services", they are more "external". Other categories are "neutral".  
+From the graph, we can find for job categories "Clerical", "Social", and "Administration", these categories are more "internal". For job categories "Information", "Policy", "Public", "Legal", and "Constituent Services", they are more "external". Other categories are "neutral".  Thus, for job seekers who are not city employees now, it is difficult to work in Administration. 
 
 ## Word Cloud for Preferred Skills
 
