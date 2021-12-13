@@ -145,27 +145,28 @@ df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post
 df1<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post Until", "Full-Time/Part-Time indicator")
 
 # df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
-plot_missing(df1,percent = FALSE)
+plot_missing(df1,percent = TRUE)
 
 ```
-From above plot we can observed that there are 30 different patterns. There are near 200 rows recorded as complete cases. The reason may be each job position is different. The most common pattern is missing of hours shift, Post Until and location.
+From above plot we can observed that there are 30 different patterns. There are near 7% rows recorded as complete cases.The most common pattern is missing of hours shift, post until and work location 1, about 25% of total rows. And the amount of the pattern whose missing is hours shift and work location 1 is around 12.5% of total rows, which is similar to the amount of the pattern whose missing is hours shift and post until. The reason is that for hours shift, many job postings do not have uniform standards; for post until, blank means post until filled; and for work location 1, many job postings have given their work locations in variable "Work Location" and do not one more specific work location. 
 
-From above plot, we can see that 100% of Recruitment Contact are missing, so we decide to drop this column.
+
 The hours/Shift have over 75% values are missing, and for those values that are not lost, they are very different from each other, and are also difficult for us to classify and compare, so we decide to remove this column.
 The Post Until column have over 50% values are missing but we will keep it because Post Until is a date that the job post is available, and the missing means this post will remain available until filled.
-The Prefered Skill column have 10% values are missing. We will keep it because the missing means this post do not have prefered skill requirement.
-For other variables, we will determine how to deal with them after we finish data transformation.
+The Preferred Skill column have 10% values are missing. We will keep it because the missing means this post do not have preferred skill requirement.
+For other variables, we will determine how to deal with them when we make visualization.
 
 
 ```{r fig2, fig.height = 5, fig.width = 10,message=FALSE,echo=FALSE}
 c <- seq(1,2838,by = 188)
 df16 <- df[c,]
 tidydf16 <- df16 %>% gather(key, value, -"Business Title", -"Work Location 1", -"Full-Time/Part-Time indicator") %>% mutate(missing = ifelse(is.na(value), "yes", "no"))
-ggplot(tidydf16, aes(x = key, y = fct_rev(tidydf16$`Business Title`), fill = missing )) + geom_tile(color = "white") + scale_fill_viridis_d() + theme_bw()+ylab('Business Title')+xlab("") 
+ggplot(tidydf16, aes(x = key, y = fct_rev(tidydf16$`Business Title`), fill = missing)) + geom_tile(color = "white") + scale_fill_viridis_d() + theme_bw()+ylab('Business Title')+xlab("") + scale_fill_manual(values = c('no'='lightgrey','yes'='mediumpurple'))
+
 
 ```
 
-Since Business title is one of the most important variables,we choose some records to analyze the relationship and check if our decision is right.
+Since Business title is one of the most important variables,we choose some records to analyze the relationship and check if our decision is right. From this graph we can find most of this business titles miss "Hours/Shift", but for variable "Preferred Skills", almost all business titles have a value. Thus, our decision is right.
 
 ```{r}
 finalJobs <- NYC_Jobs[ , -which(colnames(NYC_Jobs) %in% c("Hours/Shift" ,"Work Location 1"))]
