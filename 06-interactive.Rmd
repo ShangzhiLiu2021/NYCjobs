@@ -4,6 +4,10 @@
 
 ## D3 interactive Annual Salary Distribution
 
+For job seekers who want to work in NYC but do not know about NYC salary level, this interactive part can help them to get a salary expectation.
+For job seekers who have a salary expectation but not sure apply for which category, this interactive part can help them to compare each category.
+
+
 Click the button at the bottom to select the job category or view all you are interested in.
 If you want to know the specific quantity, you can hover the mouse on each bar.
 
