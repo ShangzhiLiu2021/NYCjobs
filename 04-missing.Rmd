@@ -140,7 +140,7 @@ We can see that there are total 11 columns have missing values. We decide to ign
 We choose 5 columns that have more than 1% missing values to draw the missing pattern graph
 
 ```{r fig1, fig.height = 10, fig.width = 10,message=FALSE,echo=FALSE}
-df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Business Title","Post Until", "Full-Time/Part-Time indicator")
+df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post Until", "Full-Time/Part-Time indicator")
 
 
 # df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
