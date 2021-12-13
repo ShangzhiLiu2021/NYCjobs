@@ -9,35 +9,38 @@ The reason why we choose this dataset is that it is from the City of New York's 
 This dataset has 2838 rows and 30 columns. Each row is a Job Posting. Each column is one kind of information for each job posting.
 For these 30 variables:
 
-1. Job ID (num): Job Opening ID.
-2. Agency (chr): Name of the City agency where the vacancy exists.
-3. Posting Type (chr): Internal or External job posting. Internal postings available to city employees and external postings available to the general public are included.
-4. #Of Positions (num): Number of vacancies to be filled.
-5. Business Title (chr): Business title
-6. Civil Service Title (chr): Civil Service title
-7. Title Classification (chr):All Civil Service title are grouped into four categories: Competitive Class/Non-Competitive Class/Labor Class/Exempt Class.
-8. Title Code No (chr): Civil Service title Code
-9. Level (chr): Civil Service title level
-10. Job Category (chr)	
-11. Full-Time/Part-Time indicator (chr)
-12. Career Level (chr)	
-13. Salary Range From (num): Proposed salary from: range. (Can be 0)
-14. Salary Range To (num): Proposed salary to: range. (Can be 0)
-15. Salary Frequency (chr): Proposed salary frequency
-16. Work Location (chr): Agency location.
-17. Division/Work Unit (chr): Department/Division within the hiring agency.
-18. Job Description (chr): Description of the job responsibilities for this position.
-19. Minimum Qual Requirements (chr): Minimum qualifications required for position.
-20. Preferred Skills (chr): Preferred skills for this position.
-21. Additional Information (chr): Additional information provided by the hiring agency.
-22. To Apply (chr): Instructions on how to apply for this postion.
-23. Hours/Shift (chr): Working hours and shift information.
-24. Work Location 1 (chr): Specific work location for this opening.
-25. Recruitment Contact (logi): Recruitment contact information.
-26. Residency Requirement (chr): Residency requirements for this position.
-27. Posting Date (chr): Date that the position was posted.
-28. Post Until (chr): Date Posting will be removed. (Blank means post until filled)
-29. Posting Updated (chr): Last Modification Date.
-30. Process Date (chr): Dataset created date.
+| Variable|Data Type| Description    |
+| ------- |:------:| --------------:|
+|Job ID |(num) |Job Opening ID.|
+|Agency |(chr)|Name of the City agency where the vacancy exists.|
+|Posting Type |(chr) |Internal or External job posting. Internal postings available to city employees and externalpostings available to the general public are included.|
+|#Of Positions |(num)|Number of vacancies to be filled.|
+|Business Title |(chr)|Business title|
+|Civil Service Title |(chr)|Civil Service title|
+|Title Classification |(chr)|All Civil Service title are grouped into four categories: Competitive| |Class/Non-Competitive Class/Labor Class/Exempt Class.|
+|Title Code No |(chr)| Civil Service title Code|
+|Level| (chr)|Civil Service title level|
+|Job Category |(chr)|
+|Full-Time/Part-Time indicator |(chr)|Full time or Part time Job
+|Career Level |(chr)|Career Level Class
+|Salary Range From |(num) |Proposed salary from: range. (Can be 0)|
+|Salary Range To |(num)|Proposed salary to: range. (Can be 0)|
+|Salary Frequency |(chr)|Proposed salary frequency|
+|Work Location |(chr) |Agency location.|
+|Division/Work Unit |(chr) |Department/Division within the hiring agency.|
+|Job Description| (chr)|Description of the job responsibilities for this position.|
+|Minimum Qual Requirements |(chr) |Minimum qualifications required for position.|
+|Preferred Skills| (chr)|Preferred skills for this position.|
+|Additional Information |(chr)|Additional information provided by the hiring agency.|
+|To Apply |(chr)|Instructions on how to apply for this postion.|
+|Hours/Shift |(chr) |Working hours and shift information.|
+|Work Location 1 |(chr)|Specific work location for this opening.|
+|Recruitment Contact |(logi)|Recruitment contact information.|
+|Residency Requirement| (chr)|Residency requirements for this position.|
+|Posting Date |(chr)|Date that the position was posted.|
+|Post Until |(chr) |Date Posting will be removed. (Blank means post until filled)|
+|Posting Updated |(chr)|Last Modification Date.|
+|Process Date |(chr)|Dataset created date.|
+
 
 The problem with this data is that there are some blank value, and when we work with variable "Career Level", although it shows the type of this variable is chr, when one of our group member work with this variable, it shows the type of this variable num and cannot read it. Thus, we create a new column to rename and store its value.
