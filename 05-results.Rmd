@@ -182,6 +182,13 @@ In this mosaic graph, we analyze the relationship between degree requirement and
 2. For all job postings that requires New York residency requirement: The percents of Doctorate and master's degree requirement are similar in both external and internal posting type. However, for job postings whose posting type is external, their percent of bachelor degree requirement is higher , and their percents of associate degree and high school diploma are smaller than those whose posting type is internal. 
 
 ## Title Classification
+All NYC job positions have 4 job classes: competitive, non-competitive, exempt and labor.
+Competitive means these positions require examination.
+Exempt means competitive or non-competitive examinations or other qualification requirements are not practical.
+Labor Positions are positions is mainly engaged in unskilled manual labor, like cleaner and driver.
+Non-Competitive Positions are positions that are not in the exempt class or the labor class and examination has been determined to not be practicable. 
+Is there any difference in salary between each class?
+
 
 ```{r}
 D3jobs = job %>% mutate(minSalary = case_when(job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 25000 ~ "0-25k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 50000 & job$`Salary Range From` > 25000 ~ "25k-50k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 75000 & job$`Salary Range From` > 50000 ~ "50k-75k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` <= 100000 & job$`Salary Range From` > 75000 ~ "75k-100k", job$`Salary Frequency`=="Annual" & job$`Salary Range From` > 100000 ~ ">100k"))
