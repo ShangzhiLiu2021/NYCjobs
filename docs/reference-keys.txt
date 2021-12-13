@@ -11,4 +11,7 @@ title-classification
 external-and-internal
 word-cloud-for-preferred-skills
 interactive-component
+d3-interactive-annual-salary-distribution
+prefered-skills-of-engineer
+section
 conclusion

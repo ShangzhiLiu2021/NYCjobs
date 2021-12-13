@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Interactive component | NYC jobs</title>
-  <meta name="description" content="Chapter 6 Interactive component | NYC jobs" />
+  <title>Chapter 6 Interactive component | NYC Job Analysis</title>
+  <meta name="description" content="Chapter 6 Interactive component | NYC Job Analysis" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Interactive component | NYC jobs" />
+  <meta property="og:title" content="Chapter 6 Interactive component | NYC Job Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Interactive component | NYC jobs" />
+  <meta name="twitter:title" content="Chapter 6 Interactive component | NYC Job Analysis" />
   
   
   
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="results.html"/>
-<link rel="next" href="conclusion.html"/>
+<link rel="next" href="section.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -92,8 +92,13 @@
 <li class="chapter" data-level="5.6" data-path="results.html"><a href="results.html#external-and-internal"><i class="fa fa-check"></i><b>5.6</b> External and Internal</a></li>
 <li class="chapter" data-level="5.7" data-path="results.html"><a href="results.html#word-cloud-for-preferred-skills"><i class="fa fa-check"></i><b>5.7</b> Word Cloud for Preferred Skills</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#d3-interactive-annual-salary-distribution"><i class="fa fa-check"></i><b>6.1</b> D3 interactive Annual Salary Distribution</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#prefered-skills-of-engineer"><i class="fa fa-check"></i><b>6.2</b> Prefered skills of Engineer</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>7</b> <iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800"></iframe></a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -105,7 +110,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC jobs</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC Job Analysis</a>
           </h1>
         </div>
 
@@ -115,6 +120,20 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
+<div id="d3-interactive-annual-salary-distribution" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> D3 interactive Annual Salary Distribution</h2>
+<p>Click the button at the bottom to select the job category or view all you are interested in.
+If you want to know the specific quantity, you can hover the mouse on each bar.</p>
+<p>The embed version may compress the y axis length.
+For Standalone version, Please click : <a href="Interactive-annual-salary.html">Interactive-annual-salary.html</a></p>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800">
+</iframe>
+</div>
+<div id="prefered-skills-of-engineer" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Prefered skills of Engineer</h2>
+<p>Use wordcloud2 package to build this wordcloud.
+If you want to know the specific quantity, you can hover the mouse on each word.</p>
 <pre><code>## # A tibble: 87 x 2
 ##    word           freq
 ##    &lt;chr&gt;         &lt;int&gt;
@@ -131,11 +150,11 @@
 ## # ... with 77 more rows</code></pre>
 <div id="htmlwidget-4fa42137bbd0349aaf24" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
 <script type="application/json" data-for="htmlwidget-4fa42137bbd0349aaf24">{"x":{"word":["experience","ability","design","knowledge","construction","strong","management","communication","project","excellent","written","york","engineering","projects","candidates","preferred","software","microsoft","office","including","license","technical","excel","verbal","standards","writing","proficiency","planning","demonstrated","multiple","analysis","related","valid","time","organizational","autocad","contract","plans","development","word","candidate","field","applications","computer","effectively","drawings","public","systems","city","powerpoint","requirements","specifications","complex","suite","interpersonal","professional","familiarity","possess","proficient","reports","facilities","manage","practices","water","data","review","required","building","code","issues","deadlines","preference","urban","leadership","analytical","motor","staff","drivera","electrical","meet","structural","application","environment","operations","shop","site","team"],"freq":[640,403,358,306,262,256,241,231,204,200,175,162,152,150,146,139,138,133,132,128,123,121,120,119,117,110,105,102,100,100,99,97,96,92,91,88,88,84,82,81,80,80,79,79,78,75,73,73,72,72,72,72,71,71,70,70,68,68,68,65,64,63,63,63,62,62,61,60,60,60,59,59,58,57,56,54,54,51,51,51,50,49,49,47,47,47,47],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.5625,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+##</p>
 <p>Standalone version: <a href="Interactive-annual-salary.html">Interactive-annual-salary.html</a></p>
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800">
-</iframe>
-
+</div>
 </div>
             </section>
 
@@ -143,7 +162,7 @@
         </div>
       </div>
 <a href="results.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="section.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | NYC jobs</title>
-  <meta name="description" content="Chapter 4 Missing values | NYC jobs" />
+  <title>Chapter 4 Missing values | NYC Job Analysis</title>
+  <meta name="description" content="Chapter 4 Missing values | NYC Job Analysis" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | NYC jobs" />
+  <meta property="og:title" content="Chapter 4 Missing values | NYC Job Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | NYC jobs" />
+  <meta name="twitter:title" content="Chapter 4 Missing values | NYC Job Analysis" />
   
   
   
@@ -92,8 +92,13 @@
 <li class="chapter" data-level="5.6" data-path="results.html"><a href="results.html#external-and-internal"><i class="fa fa-check"></i><b>5.6</b> External and Internal</a></li>
 <li class="chapter" data-level="5.7" data-path="results.html"><a href="results.html#word-cloud-for-preferred-skills"><i class="fa fa-check"></i><b>5.7</b> Word Cloud for Preferred Skills</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#d3-interactive-annual-salary-distribution"><i class="fa fa-check"></i><b>6.1</b> D3 interactive Annual Salary Distribution</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#prefered-skills-of-engineer"><i class="fa fa-check"></i><b>6.2</b> Prefered skills of Engineer</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>7</b> <iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800"></iframe></a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -105,7 +110,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC jobs</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC Job Analysis</a>
           </h1>
         </div>
 
@@ -117,7 +122,7 @@
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
 <p>For convenience, we replace all empty value to NA first.</p>
 <pre><code>## [1] 2838   22</code></pre>
-<p>Our dataset has 2838 rows and 30 columns.</p>
+<p>After data transformation, our dataset has 2838 rows and 22 columns.</p>
 <p>We want to check if there is any missing value in our NYC job dataset.</p>
 <pre><code>##                                col
 ## Hours/Shift                   2050
@@ -142,10 +147,10 @@
 ## Salary Range To                  0
 ## Salary Frequency                 0
 ## Work Location                    0</code></pre>
-<p>We can see that there are total 12 columns have missing values. We decide to ignore Minimum Qualify Requirement, To Apply, Job Category, Career Level and Residency Requirement because they only have less than 1% missing values in 2838 records.</p>
-<p>We choose 7 columns that have more than 1% missing values to draw the missing pattern graph</p>
+<p>We can see that there are total 11 columns have missing values. We decide to ignore Minimum Qualify Requirement, Job Category, Career Level and Residency Requirement because they only have less than 1% missing values in 2838 records.</p>
+<p>We choose 5 columns that have more than 1% missing values to draw the missing pattern graph</p>
 <p><img src="finalproj_files/figure-html/fig1-1.png" width="960" />
-From above plot we can observed that there are 53 different patterns. There are no rows recorded as complete for all variables. The reason may be each job position is different. The most common pattern is missing of Recruitment Contact, hours shift, Post Until and location.</p>
+From above plot we can observed that there are 30 different patterns. There are near 200 rows recorded as complete cases. The reason may be each job position is different. The most common pattern is missing of hours shift, Post Until and location.</p>
 <p>From above plot, we can see that 100% of Recruitment Contact are missing, so we decide to drop this column.
 The hours/Shift have over 75% values are missing, and for those values that are not lost, they are very different from each other, and are also difficult for us to classify and compare, so we decide to remove this column.
 The Post Until column have over 50% values are missing but we will keep it because Post Until is a date that the job post is available, and the missing means this post will remain available until filled.
