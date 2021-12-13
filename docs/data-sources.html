@@ -125,40 +125,172 @@ Internal postings available to city employees and external postings available to
 <p>The reason why we choose this dataset is that it is from the City of New York’s official website, which is very reliable, representative and updated. Therefore, it can show more useful information and trends about job postings in NYC.</p>
 <p>This dataset has 2838 rows and 30 columns. Each row is a Job Posting. Each column is one kind of information for each job posting.
 For these 30 variables:</p>
-<ol style="list-style-type: decimal">
-<li>Job ID (num): Job Opening ID.</li>
-<li>Agency (chr): Name of the City agency where the vacancy exists.</li>
-<li>Posting Type (chr): Internal or External job posting. Internal postings available to city employees and external postings available to the general public are included.</li>
-<li>#Of Positions (num): Number of vacancies to be filled.</li>
-<li>Business Title (chr): Business title</li>
-<li>Civil Service Title (chr): Civil Service title</li>
-<li>Title Classification (chr):All Civil Service title are grouped into four categories: Competitive Class/Non-Competitive Class/Labor Class/Exempt Class.</li>
-<li>Title Code No (chr): Civil Service title Code</li>
-<li>Level (chr): Civil Service title level</li>
-<li>Job Category (chr)<br />
-</li>
-<li>Full-Time/Part-Time indicator (chr)</li>
-<li>Career Level (chr)<br />
-</li>
-<li>Salary Range From (num): Proposed salary from: range. (Can be 0)</li>
-<li>Salary Range To (num): Proposed salary to: range. (Can be 0)</li>
-<li>Salary Frequency (chr): Proposed salary frequency</li>
-<li>Work Location (chr): Agency location.</li>
-<li>Division/Work Unit (chr): Department/Division within the hiring agency.</li>
-<li>Job Description (chr): Description of the job responsibilities for this position.</li>
-<li>Minimum Qual Requirements (chr): Minimum qualifications required for position.</li>
-<li>Preferred Skills (chr): Preferred skills for this position.</li>
-<li>Additional Information (chr): Additional information provided by the hiring agency.</li>
-<li>To Apply (chr): Instructions on how to apply for this postion.</li>
-<li>Hours/Shift (chr): Working hours and shift information.</li>
-<li>Work Location 1 (chr): Specific work location for this opening.</li>
-<li>Recruitment Contact (logi): Recruitment contact information.</li>
-<li>Residency Requirement (chr): Residency requirements for this position.</li>
-<li>Posting Date (chr): Date that the position was posted.</li>
-<li>Post Until (chr): Date Posting will be removed. (Blank means post until filled)</li>
-<li>Posting Updated (chr): Last Modification Date.</li>
-<li>Process Date (chr): Dataset created date.</li>
-</ol>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="26%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th align="center">Data Type</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Job ID</td>
+<td align="center">(num)</td>
+<td align="right">Job Opening ID.</td>
+</tr>
+<tr class="even">
+<td>Agency</td>
+<td align="center">(chr)</td>
+<td align="right">Name of the City agency where the vacancy exists.</td>
+</tr>
+<tr class="odd">
+<td>Posting Type</td>
+<td align="center">(chr)</td>
+<td align="right">Internal or External job posting. Internal postings available to city employees and externalpostings available to the general public are included.</td>
+</tr>
+<tr class="even">
+<td>#Of Positions</td>
+<td align="center">(num)</td>
+<td align="right">Number of vacancies to be filled.</td>
+</tr>
+<tr class="odd">
+<td>Business Title</td>
+<td align="center">(chr)</td>
+<td align="right">Business title</td>
+</tr>
+<tr class="even">
+<td>Civil Service Title</td>
+<td align="center">(chr)</td>
+<td align="right">Civil Service title</td>
+</tr>
+<tr class="odd">
+<td>Title Classification</td>
+<td align="center">(chr)</td>
+<td align="right">All Civil Service title are grouped into four categories: Competitive</td>
+</tr>
+<tr class="even">
+<td>Title Code No</td>
+<td align="center">(chr)</td>
+<td align="right">Civil Service title Code</td>
+</tr>
+<tr class="odd">
+<td>Level</td>
+<td align="center">(chr)</td>
+<td align="right">Civil Service title level</td>
+</tr>
+<tr class="even">
+<td>Job Category</td>
+<td align="center">(chr)</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td>Full-Time/Part-Time indicator</td>
+<td align="center">(chr)</td>
+<td align="right">Full time or Part time Job</td>
+</tr>
+<tr class="even">
+<td>Career Level</td>
+<td align="center">(chr)</td>
+<td align="right">Career Level Class</td>
+</tr>
+<tr class="odd">
+<td>Salary Range From</td>
+<td align="center">(num)</td>
+<td align="right">Proposed salary from: range. (Can be 0)</td>
+</tr>
+<tr class="even">
+<td>Salary Range To</td>
+<td align="center">(num)</td>
+<td align="right">Proposed salary to: range. (Can be 0)</td>
+</tr>
+<tr class="odd">
+<td>Salary Frequency</td>
+<td align="center">(chr)</td>
+<td align="right">Proposed salary frequency</td>
+</tr>
+<tr class="even">
+<td>Work Location</td>
+<td align="center">(chr)</td>
+<td align="right">Agency location.</td>
+</tr>
+<tr class="odd">
+<td>Division/Work Unit</td>
+<td align="center">(chr)</td>
+<td align="right">Department/Division within the hiring agency.</td>
+</tr>
+<tr class="even">
+<td>Job Description</td>
+<td align="center">(chr)</td>
+<td align="right">Description of the job responsibilities for this position.</td>
+</tr>
+<tr class="odd">
+<td>Minimum Qual Requirements</td>
+<td align="center">(chr)</td>
+<td align="right">Minimum qualifications required for position.</td>
+</tr>
+<tr class="even">
+<td>Preferred Skills</td>
+<td align="center">(chr)</td>
+<td align="right">Preferred skills for this position.</td>
+</tr>
+<tr class="odd">
+<td>Additional Information</td>
+<td align="center">(chr)</td>
+<td align="right">Additional information provided by the hiring agency.</td>
+</tr>
+<tr class="even">
+<td>To Apply</td>
+<td align="center">(chr)</td>
+<td align="right">Instructions on how to apply for this postion.</td>
+</tr>
+<tr class="odd">
+<td>Hours/Shift</td>
+<td align="center">(chr)</td>
+<td align="right">Working hours and shift information.</td>
+</tr>
+<tr class="even">
+<td>Work Location 1</td>
+<td align="center">(chr)</td>
+<td align="right">Specific work location for this opening.</td>
+</tr>
+<tr class="odd">
+<td>Recruitment Contact</td>
+<td align="center">(logi)</td>
+<td align="right">Recruitment contact information.</td>
+</tr>
+<tr class="even">
+<td>Residency Requirement</td>
+<td align="center">(chr)</td>
+<td align="right">Residency requirements for this position.</td>
+</tr>
+<tr class="odd">
+<td>Posting Date</td>
+<td align="center">(chr)</td>
+<td align="right">Date that the position was posted.</td>
+</tr>
+<tr class="even">
+<td>Post Until</td>
+<td align="center">(chr)</td>
+<td align="right">Date Posting will be removed. (Blank means post until filled)</td>
+</tr>
+<tr class="odd">
+<td>Posting Updated</td>
+<td align="center">(chr)</td>
+<td align="right">Last Modification Date.</td>
+</tr>
+<tr class="even">
+<td>Process Date</td>
+<td align="center">(chr)</td>
+<td align="right">Dataset created date.</td>
+</tr>
+</tbody>
+</table>
 <p>The problem with this data is that there are some blank value, and when we work with variable “Career Level”, although it shows the type of this variable is chr, when one of our group member work with this variable, it shows the type of this variable num and cannot read it. Thus, we create a new column to rename and store its value.</p>
 
 </div>
