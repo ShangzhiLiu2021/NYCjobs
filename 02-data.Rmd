@@ -2,6 +2,7 @@
 
 Our group collected the data together. It is from https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t.
 This dataset contains current job postings available on the City of New York’s official jobs site: http://www.nyc.gov/html/careers/html/search/search.shtml.
+Internal postings available to city employees and external postings available to the general public are included.
 
 This dataset has 2838 rows and 30 columns. Each row is a Job Posting from one company. Each column is one kind of information for each job posting.
 For these 30 variables:
@@ -37,4 +38,4 @@ For these 30 variables:
 29. Posting Updated (chr): Last Modification Date.
 30. Process Date (chr): Dataset created date.
 
-The problem with this data is that there are some blank value.
+The problem with this data is that there are some blank value, and when we work with variable "Career Level", although it shows the type of this variable is chr, one of its contents "Student" is another type and we cannot read it. 

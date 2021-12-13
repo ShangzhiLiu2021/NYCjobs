@@ -181,6 +181,10 @@ In this mosaic graph, we analyze the relationship between degree requirement and
 
 2. For all job postings that requires New York residency requirement: The percents of Doctorate and master's degree requirement are similar in both external and internal posting type. However, for job postings whose posting type is external, their percent of bachelor degree requirement is higher , and their percents of associate degree and high school diploma are smaller than those whose posting type is internal. 
 
+3. For all external job postings: we can find the percents of master's degree and Doctorate degree requirement in "not required" are greater than those in "required". This shows the external job postings that do not need New York residency have higher requirements for high-end degrees than external job postings that need New York residency.
+
+4. Similar for internal job postings, the internal job postings that do not need New York residency have higher requirements for high-end degrees than internal job postings that need New York residency.
+
 ## Title Classification
 All NYC job positions have 4 job classes: competitive, non-competitive, exempt and labor.
 Competitive means these positions require examination.
@@ -199,6 +203,7 @@ D3jobs = D3jobs %>% filter(!is.na(minSalary))
 
 ```{r}
 library(ggridges)
+job$`Title Classification` = fct_relevel(job$`Title Classification`, "Competitive-1", "Pending Classification-2","Labor-3","Exempt-4","Non-competitive-5")
 ggplot(job, aes(x=`Salary Range From` / 1000, y=`Title Classification`)) + geom_density_ridges(alpha=0.6) + xlab("salary range from (unit: 1000 dollar)")
 ```
 
@@ -226,7 +231,6 @@ ggplot(scatter,aes(External, Internal,color=type)) + geom_point()+geom_label_rep
 ```
 
 In this graph, for each job category, we set some categories are more "external" if its number of external job postings is greater than the number of internal job postings times 0.8, some categories are more "internal" if its number of external job postings is less than the number of internal job postings times 0.6, and else categories are "neutral".
-Reason:
 From the graph, we can find for job categories "Clerical", "Social", and "Administration", these categories are more "internal". For job categories "Information", "Policy", "Public", "Legal", and "Constituent Services", they are more "external". Other categories are "neutral".  
 
 ## Word Cloud for Preferred Skills
