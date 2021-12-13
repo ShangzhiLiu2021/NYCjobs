@@ -208,7 +208,7 @@ job$`Title Classification` = fct_relevel(job$`Title Classification`, "Competitiv
 ggplot(job, aes(x=`Salary Range From` / 1000, y=`Title Classification`)) + geom_density_ridges(alpha=0.6) + xlab("salary range from (unit: 1000 dollar)")
 ```
 
-In this ridgeline plots of "salary range from", one for each kind of "Title Classification", it shows us how the number of job postings of each title classification changes with the lower bound of salary range. We can find that for job postings whose title classifications are "Competitive-1", "Pending Classification-2", "Exempt-4", and "Non-competitive-5", their low bound of salary range are concentrated around 50000 dollar. However, for job postings whose title classification is "Labor-3", most of it low bound salary range is less than 50000 dollar.
+In this ridgeline plots, one for each kind of "Title Classification", it shows us how the number of job postings of each title classification changes with the lower bound of salary range. We can find that for job postings whose title classifications are "Competitive-1", "Pending Classification-2", and "Non-competitive-5", their low bound of salary range are concentrated around 50,000 dollars. "Exempt-4" is more likely to get a higher salary, with one peak near 100,000 dollars and one peak near 150,000 dollars. However, for job postings whose title classification is "Labor-3", most of it low bound salary range is less than 50,000 dollars, which may because it is unskilled job.
 
 ## External and Internal
 
