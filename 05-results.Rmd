@@ -225,7 +225,7 @@ From the graph, we can find for job categories "Clerical", "Social", and "Admini
 ## Word Cloud for Preferred Skills
 
 We noticed that each job has a specific long paragraph to describe the Preferred Skills,  so we will focus on the keywords that appear in  Preferred Skills from the whole job posting dataset.  By split all words and drop all meaningfuless word like conjunctions, numbers and symbols, we generate a worldcloud with 
-100 most frequent words.
+100 most frequent words. 
 
 ```{r}
 
@@ -259,3 +259,4 @@ library(wordcloud2)
 wordcloud2(wordc,size = 2)
  
 ```
+There are many information we can extract from above wordcloud. For example, we can see that'Data','Microsoft','excel' appear around 1000 times, and 'team','project', 'manage' appear more than 500 times. This may indicate most employer expect the job seeker are familar with microsoft office and have basic data analysis ability. What's more, experience with team project may also be a bonus for job seeker.
