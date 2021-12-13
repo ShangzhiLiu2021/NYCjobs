@@ -129,22 +129,23 @@ After data transformation, our dataset has 2838 rows and 22 columns.
 
 We want to check if there is any missing value in our NYC job dataset.
 ```{r,echo=FALSE}
-jobData <-NYC_Jobs
+jobData <-NYC_Jobs[ , -which(colnames(NYC_Jobs) %in% c("degreereq"))]
 col<-colSums(is.na(jobData)) %>% sort(decreasing = TRUE)
 coll<-data.frame(col)
 coll
 ```
-We can see that there are total 11 columns have missing values. We decide to ignore Minimum Qualify Requirement, Job Category, Career Level and Residency Requirement because they only have less than 1% missing values in 2838 records.
+We can see that there are total 10 columns have missing values. We decide to ignore Minimum Qualify Requirement, Job Category, Career Level and Residency Requirement because they only have less than 1% missing values in 2838 records.
 
 
 We choose 5 columns that have more than 1% missing values to draw the missing pattern graph
 
 ```{r fig1, fig.height = 10, fig.width = 10,message=FALSE,echo=FALSE}
-df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post Until", "Full-Time/Part-Time indicator")
+df<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post Until", "Full-Time/Part-Time indicator", "Business Title")
 
+df1<-NYC_Jobs%>%select("Preferred Skills", "Hours/Shift" ,"Work Location 1","Post Until", "Full-Time/Part-Time indicator")
 
 # df=rename(df,skill="Preferred Skills",RecruCon="Recruitment Contact", Info="Additional Information", hours="Hours/Shift",loc="Work Location 1",title="Business Title",FTPT="Full-Time/Part-Time indicator")
-plot_missing(df,percent = FALSE)
+plot_missing(df1,percent = FALSE)
 
 ```
 From above plot we can observed that there are 30 different patterns. There are near 200 rows recorded as complete cases. The reason may be each job position is different. The most common pattern is missing of hours shift, Post Until and location.

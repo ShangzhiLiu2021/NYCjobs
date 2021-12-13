@@ -24,7 +24,7 @@
 <meta name="author" content="Yunxiao Wang, Shangzhi Liu" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -97,8 +97,7 @@
 <li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#d3-interactive-annual-salary-distribution"><i class="fa fa-check"></i><b>6.1</b> D3 interactive Annual Salary Distribution</a></li>
 <li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#prefered-skills-of-engineer"><i class="fa fa-check"></i><b>6.2</b> Prefered skills of Engineer</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>7</b> <iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800"></iframe></a></li>
-<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -151,14 +150,22 @@
 <p><img src="finalproj_files/figure-html/fig3-1.png" width="960" /></p>
 <p>In this mosaic graph, it shows when career level changes from “entry-level” to “executive” (from low level to high level), the percent of high school diploma requirement become smaller and smaller, and the percent of master’s degree requirement become larger and larger. The percent of Doctorate requirement is very low for all of these career levels. Also, the percents of bachelor degree requirement and associate degree requirement are similar in career levels “entry-level”, “Experienced”, and “Manager”. But in career level “executive”, the percents of both degree requirement are almost 0, almost all degree requirements are from master’s degree and bachelor degree. Adding all these information together, we find higher career level cannot substitute for higher degree level, instead, when job postings’ career level become higher, their degree requirements also become higher and do not need people whose degree is low.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p>In this mosaic graph, we analyze the relationship between degree requirement and posting type &amp; residency requirement.
-1. For all job postings that do not require New York residency requirement: the degree requirement of external posting type is very similar to the degree requirement of internal posting type. The percent of bachelor degree requirement is more than 50% in both of these two posting type, which is the largest. The second largest percent of degree requirement is master’s degree, which is around 33%. The percent of Doctorate requirement is smallest.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>For all job postings that requires New York residency requirement: The percents of Doctorate and master’s degree requirement are similar in both external and internal posting type. However, for job postings whose posting type is external, their percent of bachelor degree requirement is higher , and their percents of associate degree and high school diploma are smaller than those whose posting type is internal.</li>
+<p>In this mosaic graph, we analyze the relationship between degree requirement and posting type &amp; residency requirement.</p>
+<ol style="list-style-type: decimal">
+<li><p>For all job postings that do not require New York residency requirement: the degree requirement of external posting type is very similar to the degree requirement of internal posting type. The percent of bachelor degree requirement is more than 50% in both of these two posting type, which is the largest. The second largest percent of degree requirement is master’s degree, which is around 33%. The percent of Doctorate requirement is smallest.</p></li>
+<li><p>For all job postings that requires New York residency requirement: The percents of Doctorate and master’s degree requirement are similar in both external and internal posting type. However, for job postings whose posting type is external, their percent of bachelor degree requirement is higher , and their percents of associate degree and high school diploma are smaller than those whose posting type is internal.</p></li>
+<li><p>For all external job postings: we can find the percents of master’s degree and Doctorate degree requirement in “not required” are greater than those in “required”. This shows the external job postings that do not need New York residency have higher requirements for high-end degrees than external job postings that need New York residency.</p></li>
+<li><p>Similar for internal job postings, the internal job postings that do not need New York residency have higher requirements for high-end degrees than internal job postings that need New York residency.</p></li>
 </ol>
 </div>
 <div id="title-classification" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Title Classification</h2>
+<p>All NYC job positions have 4 job classes: competitive, non-competitive, exempt and labor.
+Competitive means these positions require examination.
+Exempt means competitive or non-competitive examinations or other qualification requirements are not practical.
+Labor Positions are positions is mainly engaged in unskilled manual labor, like cleaner and driver.
+Non-Competitive Positions are positions that are not in the exempt class or the labor class and examination has been determined to not be practicable.
+Is there any difference in salary between each class?</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>In this ridgeline plots of “salary range from”, one for each kind of “Title Classification”, it shows us how the number of job postings of each title classification changes with the lower bound of salary range. We can find that for job postings whose title classifications are “Competitive-1”, “Pending Classification-2”, “Exempt-4”, and “Non-competitive-5”, their low bound of salary range are concentrated around 50000 dollar. However, for job postings whose title classification is “Labor-3”, most of it low bound salary range is less than 50000 dollar.</p>
 </div>
@@ -167,7 +174,6 @@
 <p>Except the New York residency requirement, these job postings have another restriction variable “Posting Type” whose meaning is internal or external job posting. And the dataset claims that internal postings available to city employees and external postings available to the general public are included. To find more information about internal and external, we create a scatter plot to show the relationship between job category and this posting type.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>In this graph, for each job category, we set some categories are more “external” if its number of external job postings is greater than the number of internal job postings times 0.8, some categories are more “internal” if its number of external job postings is less than the number of internal job postings times 0.6, and else categories are “neutral”.
-Reason:
 From the graph, we can find for job categories “Clerical”, “Social”, and “Administration”, these categories are more “internal”. For job categories “Information”, “Policy”, “Public”, “Legal”, and “Constituent Services”, they are more “external”. Other categories are “neutral”.</p>
 </div>
 <div id="word-cloud-for-preferred-skills" class="section level2" number="5.7">
@@ -176,6 +182,7 @@ From the graph, we can find for job categories “Clerical”, “Social”, and
 100 most frequent words.</p>
 <div id="htmlwidget-38373ad7f96e7472f621" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
 <script type="application/json" data-for="htmlwidget-38373ad7f96e7472f621">{"x":{"word":["experience","skills","ability","knowledge","strong","excellent","management","communication","written","microsoft","data","excel","including","preferred","project","proficiency","writing","organizational","interpersonal","development","word","analytical","verbal","demonstrated","office","multiple","team","design","public","systems","york","familiarity","city","projects","computer","oral","related","environment","candidates","software","deadlines","research","manage","independently","information","detail","professional","service","complex","00c2","technical","candidate","analysis","time","effectively","powerpoint","business","field","system","required","planning","attention","ms","sql","degree","security","possess","issues","solving","people","applications","construction","services","understanding","tools","staff","license","proven","access","government","meet","financial","communications","reports","managing","policy","communicate","proficient","tasks","relationships"],"freq":[4720,4221,3212,1957,1953,1656,1616,1519,1195,1051,1042,916,900,826,793,739,735,727,698,686,684,673,667,663,663,662,651,631,625,582,574,569,565,555,538,536,534,523,522,505,497,481,477,464,460,459,458,457,450,448,446,442,432,426,414,409,397,396,386,378,367,361,361,360,359,356,354,352,348,344,338,338,336,335,332,322,318,317,315,309,301,293,288,288,284,282,271,271,269,265],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.076271186440678,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<p>There are many information we can extract from above wordcloud. For example, we can see that’Data’,‘Microsoft’,‘excel’ appear around 1000 times, and ‘team’,‘project’, ‘manage’ appear more than 500 times. This may indicate most employer expect the job seeker are familar with microsoft office and have basic data analysis ability. What’s more, experience with team project may also be a bonus for job seeker.</p>
 
 </div>
 </div>

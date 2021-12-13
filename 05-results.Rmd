@@ -176,7 +176,8 @@ ggplot(data = jobs) +
   ggtitle('Degree requirement ~ Posting type facet on Residency Requirement')
 ```
 
-In this mosaic graph, we analyze the relationship between degree requirement and posting type & residency requirement. 
+In this mosaic graph, we analyze the relationship between degree requirement and posting type & residency requirement.
+
 1. For all job postings that do not require New York residency requirement: the degree requirement of external posting type is very similar to the degree requirement of internal posting type. The percent of bachelor degree requirement is more than 50% in both of these two posting type, which is the largest. The second largest percent of degree requirement is master's degree, which is around 33%. The percent of Doctorate requirement is smallest.
 
 2. For all job postings that requires New York residency requirement: The percents of Doctorate and master's degree requirement are similar in both external and internal posting type. However, for job postings whose posting type is external, their percent of bachelor degree requirement is higher , and their percents of associate degree and high school diploma are smaller than those whose posting type is internal. 

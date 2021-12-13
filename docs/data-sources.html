@@ -24,7 +24,7 @@
 <meta name="author" content="Yunxiao Wang, Shangzhi Liu" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -97,8 +97,7 @@
 <li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#d3-interactive-annual-salary-distribution"><i class="fa fa-check"></i><b>6.1</b> D3 interactive Annual Salary Distribution</a></li>
 <li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#prefered-skills-of-engineer"><i class="fa fa-check"></i><b>6.2</b> Prefered skills of Engineer</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>7</b> <iframe src="https://vizhub.com/wyx34/1f5e5085ddfd4881a6d6e271cca0afca?mode=embed" title="Annual Salary Visualization" height="650" width="800"></iframe></a></li>
-<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -121,8 +120,10 @@
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
 <p>Our group collected the data together. It is from <a href="https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t" class="uri">https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t</a>.
-This dataset contains current job postings available on the City of New York’s official jobs site: <a href="http://www.nyc.gov/html/careers/html/search/search.shtml" class="uri">http://www.nyc.gov/html/careers/html/search/search.shtml</a>.</p>
-<p>This dataset has 2838 rows and 30 columns. Each row is a Job Posting from one company. Each column is one kind of information for each job posting.
+This dataset contains current job postings available on the City of New York’s official jobs site: <a href="http://www.nyc.gov/html/careers/html/search/search.shtml" class="uri">http://www.nyc.gov/html/careers/html/search/search.shtml</a>.
+Internal postings available to city employees and external postings available to the general public are included.</p>
+<p>The reason why we choose this dataset is that it is from the City of New York’s official website, which is very reliable, representative and updated. Therefore, it can show more useful information and trends about job postings in NYC.</p>
+<p>This dataset has 2838 rows and 30 columns. Each row is a Job Posting. Each column is one kind of information for each job posting.
 For these 30 variables:</p>
 <ol style="list-style-type: decimal">
 <li>Job ID (num): Job Opening ID.</li>
@@ -158,7 +159,7 @@ For these 30 variables:</p>
 <li>Posting Updated (chr): Last Modification Date.</li>
 <li>Process Date (chr): Dataset created date.</li>
 </ol>
-<p>The problem with this data is that there are some blank value.</p>
+<p>The problem with this data is that there are some blank value, and when we work with variable “Career Level”, although it shows the type of this variable is chr, when one of our group member work with this variable, it shows the type of this variable num and cannot read it. Thus, we create a new column to rename and store its value.</p>
 
 </div>
             </section>
